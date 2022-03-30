@@ -62,6 +62,7 @@ Controller::Controller(IPort& p_displayPort, IPort& p_foodPort, IPort& p_scorePo
         throw ConfigurationError();
     }
 }
+//void Controller::handleTimePassed(const TimeoutInd&)
 
 void Controller::handleTimePassed(const TimeoutInd&)
 {
@@ -217,6 +218,10 @@ void Controller::receive(std::unique_ptr<Event> e)
 {
     try {
         handleTimePassed(*dynamic_cast<EventT<TimeoutInd> const&>(*e));
+        //handleTimePassed(*e->getType());
+        //if(e->getMessageId() == 0x20);
+        //    handleTimePassed(*e);
+
     } catch (std::bad_cast&) {
         try {
             handleDirectionChange(*dynamic_cast<EventT<DirectionInd> const&>(*e));
